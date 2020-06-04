@@ -180,3 +180,12 @@ gradle-app.setting
 **/build/
 
 # End of https://www.toptal.com/developers/gitignore/api/gradle
+
+# Created by https://www.toptal.com/developers/gitignore/api/libreoffice
+# Edit at https://www.toptal.com/developers/gitignore?templates=libreoffice
+
+### LibreOffice ###
+# LibreOffice locks
+.~lock.*#
+
+# End of https://www.toptal.com/developers/gitignore/api/libreoffice
