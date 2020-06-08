@@ -7,7 +7,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 
 @SpringBootTest
 class XWPFTests {
@@ -17,7 +18,7 @@ class XWPFTests {
         var document = new XWPFDocument(PoipathApplication.class.getResourceAsStream("/XWPF/simpleTest.docx"));
         var text = XWPFDocumentWrapper.parse(document).paragraph(0).text();
 
-        assertEquals("No Justice", text);
+        assertThat(text, equalTo("No Justice"));
     }
 
 }
