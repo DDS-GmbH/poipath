@@ -1,11 +1,10 @@
 plugins {
-    id 'org.springframework.boot' version '2.3.0.RELEASE'
-    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
     id 'java'
+    id 'maven-publish'
 }
 
 group = 'com.docutools'
-version = '0.0.1-SNAPSHOT'
+version = '1.0.1'
 sourceCompatibility = 14
 targetCompatibility = 14
 
@@ -19,13 +18,37 @@ repositories {
     mavenCentral()
 }
 
-dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter'
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
-    testImplementation('org.springframework.boot:spring-boot-starter-test') {
-        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifactId = 'poipath'
+            from components.java
+            versionMapping {
+                usage('java-api') {
+                    fromResolutionOf('runtimeClasspath')
+                }
+                usage('java-runtime') {
+                    fromResolutionResult()
+                }
+            }
+        }
     }
+    repositories {
+        maven {
+            url "s3://docu-tools-maven/${project.version.endsWith('-SNAPSHOT') ? 'snapshot' : 'release'}"
+            credentials(AwsCredentials) {
+                accessKey project.hasProperty('AWS_ACCESS_KEY') ? AWS_ACCESS_KEY : "${System.env.AWS_ACCESS_KEY}"
+                secretKey project.hasProperty('AWS_SECRET_KEY') ? AWS_SECRET_KEY : "${System.env.AWS_SECRET_KEY}"
+            }
+        }
+    }
+}
+
+dependencies {
+    compileOnly 'org.projectlombok:lombok:1.18.12'
+    annotationProcessor 'org.projectlombok:lombok:1.18.12'
+    testImplementation('org.junit.jupiter:junit-jupiter:5.6.0')
+    testImplementation("org.hamcrest:hamcrest:2.2")
 
     implementation("org.apache.poi:poi:4.1.2")
     implementation("org.apache.poi:poi-ooxml:4.1.2")
