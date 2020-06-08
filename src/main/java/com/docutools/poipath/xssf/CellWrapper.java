@@ -9,7 +9,15 @@ public class CellWrapper {
         this.cell = cell;
     }
 
-    public String text() {
-        return cell.getStringCellValue();
+    public String content() {
+        return switch (cell.getCellType()) {
+            case _NONE -> "";
+            case NUMERIC -> String.valueOf(cell.getNumericCellValue());
+            case STRING -> cell.getStringCellValue();
+            case FORMULA -> cell.getCellFormula();
+            case BLANK -> "";
+            case BOOLEAN -> String.valueOf(cell.getBooleanCellValue());
+            case ERROR -> cell.getErrorCellString();
+        };
     }
 }

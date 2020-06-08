@@ -15,7 +15,7 @@ class XSSFTests {
     @Test
     void simpleNavigationTest() throws IOException {
         var workbook = new XSSFWorkbook(XSSFTests.class.getResourceAsStream("/XSSF/simpleTest.xlsx"));
-        var text = XSSFWorkbookWrapper.parse(workbook).sheet("OG").row(0).cell(0).text();
+        var text = XSSFWorkbookWrapper.parse(workbook).sheet("OG").row(0).cell(0).content();
 
         assertThat(text, equalTo("No Peace"));
     }
