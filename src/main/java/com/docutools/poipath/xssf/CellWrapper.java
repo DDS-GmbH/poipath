@@ -20,4 +20,8 @@ public class CellWrapper {
             case ERROR -> cell.getErrorCellString();
         };
     }
+
+    public double doubleValue() {
+        return cell.getNumericCellValue();
+    }
 }
