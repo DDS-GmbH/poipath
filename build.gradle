@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'maven-publish'
+    id "org.owasp.dependencycheck" version "5.2.4"
 }
 
 group = 'com.docutools'
@@ -66,4 +67,11 @@ compileTestJava {
 test {
     jvmArgs '--enable-preview'
     useJUnitPlatform()
+}
+
+dependencyCheck {
+    format = 'ALL'
+    junitFailOnCVSS = 7.0
+    failBuildOnCVSS = 9.0
+    suppressionFile = 'config/dependency-check/suppression.xml'
 }
