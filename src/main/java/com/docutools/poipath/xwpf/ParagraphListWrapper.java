@@ -1,21 +1,20 @@
 package com.docutools.poipath.xwpf;
 
+import java.util.List;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 
-import java.util.List;
-
 public class ParagraphListWrapper {
-    private final List<XWPFParagraph> paragraphs;
+  private final List<XWPFParagraph> paragraphs;
 
-    public ParagraphListWrapper(List<XWPFParagraph> paragraphs) {
-        this.paragraphs = paragraphs;
-    }
+  public ParagraphListWrapper(List<XWPFParagraph> paragraphs) {
+    this.paragraphs = paragraphs;
+  }
 
-    public ParagraphWrapper get(int i) {
-        return new ParagraphWrapper(paragraphs.get(i));
-    }
+  public ParagraphWrapper get(int i) {
+    return new ParagraphWrapper(paragraphs.get(i));
+  }
 
-    public int length() {
-        return paragraphs.size();
-    }
+  public int length() {
+    return paragraphs.size();
+  }
 }

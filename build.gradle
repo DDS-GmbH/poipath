@@ -1,10 +1,11 @@
 plugins {
     id 'java'
     id 'maven-publish'
+    id 'checkstyle'
 }
 
 group = 'com.docutools'
-version = '1.0.3'
+version = '1.0.4'
 sourceCompatibility = 14
 targetCompatibility = 14
 
@@ -66,4 +67,12 @@ compileTestJava {
 test {
     jvmArgs '--enable-preview'
     useJUnitPlatform()
+}
+
+tasks.withType(Checkstyle) {
+    ignoreFailures = false
+    maxWarnings = 0 // Maximum number of warnings allowed
+    reports {
+        html.destination rootProject.file("build/reports/checkstyle.html")
+    }
 }
