@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'maven-publish'
     id "org.owasp.dependencycheck" version "5.2.4"
+    id 'checkstyle'
 }
 
 group = 'com.docutools'
@@ -66,4 +67,11 @@ dependencyCheck {
     junitFailOnCVSS = 7.0
     failBuildOnCVSS = 9.0
     suppressionFile = 'config/dependency-check/suppression.xml'
+}
+tasks.withType(Checkstyle) {
+    ignoreFailures = false
+    maxWarnings = 0 // Maximum number of warnings allowed
+    reports {
+        html.destination rootProject.file("build/reports/checkstyle.html")
+    }
 }
