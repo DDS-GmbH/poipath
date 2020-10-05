@@ -3,36 +3,37 @@ package com.docutools.poipath.xwpf;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 
 public class XWPFDocumentWrapper {
-    private final XWPFDocument document;
-    private XWPFDocumentWrapper(XWPFDocument document) {
-        this.document = document;
-    }
+  private final XWPFDocument document;
 
-    public static XWPFDocumentWrapper parse(XWPFDocument document) {
-        return new XWPFDocumentWrapper(document);
-    }
+  private XWPFDocumentWrapper(XWPFDocument document) {
+    this.document = document;
+  }
 
-    public ParagraphListWrapper paragraphs() {
-        return new ParagraphListWrapper(document.getParagraphs());
-    }
+  public static XWPFDocumentWrapper parse(XWPFDocument document) {
+    return new XWPFDocumentWrapper(document);
+  }
 
-    public ParagraphWrapper paragraph(int i) {
-        return new ParagraphWrapper(document.getParagraphArray(i));
-    }
+  public ParagraphListWrapper paragraphs() {
+    return new ParagraphListWrapper(document.getParagraphs());
+  }
 
-    public TableListWrapper tables() {
-        return new TableListWrapper(document.getTables());
-    }
+  public ParagraphWrapper paragraph(int i) {
+    return new ParagraphWrapper(document.getParagraphArray(i));
+  }
 
-    public TableWrapper table(int i) {
-        return new TableWrapper(document.getTableArray(i));
-    }
+  public TableListWrapper tables() {
+    return new TableListWrapper(document.getTables());
+  }
 
-    public int length() {
-        return document.getParagraphs().size();
-    }
+  public TableWrapper table(int i) {
+    return new TableWrapper(document.getTableArray(i));
+  }
 
-    public String language() {
-        return document.getProperties().getCoreProperties().getUnderlyingProperties().getLanguageProperty().get();
-    }
+  public int length() {
+    return document.getParagraphs().size();
+  }
+
+  public String language() {
+    return document.getProperties().getCoreProperties().getUnderlyingProperties().getLanguageProperty().get();
+  }
 }
