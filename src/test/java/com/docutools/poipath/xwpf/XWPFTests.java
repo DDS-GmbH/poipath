@@ -28,4 +28,12 @@ class XWPFTests {
     assertThat(text, equalTo("No Justice"));
   }
 
+  @Test
+  void getPictureTest() throws IOException {
+    document = new XWPFDocument(XWPFTests.class.getResourceAsStream("/XWPF/pictureTest.docx"));
+    var picture = XWPFDocumentWrapper.parse(document).paragraph(0).run(0).pictures();
+
+    assertThat(picture.size(), equalTo(1));
+  }
+
 }
