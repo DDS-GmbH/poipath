@@ -1,13 +1,14 @@
 plugins {
     id 'java'
     id 'maven-publish'
+    id "org.owasp.dependencycheck" version "5.2.4"
     id 'checkstyle'
 }
 
 group = 'com.docutools'
 version = '1.0.4'
-sourceCompatibility = 14
-targetCompatibility = 14
+sourceCompatibility = 15
+targetCompatibility = 15
 
 configurations {
     compileOnly {
@@ -57,18 +58,16 @@ dependencies {
     implementation("org.apache.poi:poi-ooxml-schemas:4.1.2")
 }
 
-// Enable support for records, patterns and text blocks
-compileJava {
-    options.compilerArgs += ["--enable-preview"]
-}
-compileTestJava {
-    options.compilerArgs += ["--enable-preview"]
-}
 test {
-    jvmArgs '--enable-preview'
     useJUnitPlatform()
 }
 
+dependencyCheck {
+    format = 'ALL'
+    junitFailOnCVSS = 7.0
+    failBuildOnCVSS = 9.0
+    suppressionFile = 'config/dependency-check/suppression.xml'
+}
 tasks.withType(Checkstyle) {
     ignoreFailures = false
     maxWarnings = 0 // Maximum number of warnings allowed
