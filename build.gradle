@@ -58,7 +58,16 @@ dependencies {
     implementation("org.apache.poi:poi-ooxml-schemas:4.1.2")
 }
 
+tasks.withType(JavaCompile) {
+    options.compilerArgs += "--enable-preview"
+}
+
+java {
+    withSourcesJar()
+}
+
 test {
+    jvmArgs '--enable-preview'
     useJUnitPlatform()
 }
 
