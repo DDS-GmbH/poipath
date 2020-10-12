@@ -7,7 +7,7 @@ jobs:
   gradle-publish:
     runs-on: ubuntu-latest
     env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GITHUB_TOKEN: ${{ secrets.POIPATH_RELEASE_TOKEN }}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-java@v1
