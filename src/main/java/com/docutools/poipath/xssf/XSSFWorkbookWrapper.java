@@ -3,8 +3,6 @@ package com.docutools.poipath.xssf;
 import com.docutools.poipath.POIUtils;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.util.Optional;
-
 public record XSSFWorkbookWrapper(XSSFWorkbook workbook, String language) {
 
   public XSSFWorkbookWrapper(XSSFWorkbook workbook) {
