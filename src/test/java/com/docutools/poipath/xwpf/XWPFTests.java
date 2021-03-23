@@ -1,11 +1,10 @@
 package com.docutools.poipath.xwpf;
 
-import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import com.docutools.poipath.Documents;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.util.Objects;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -15,8 +14,7 @@ class XWPFTests {
 
   @Test
   void simpleNavigationTest() throws IOException {
-    try (var stream = Objects.requireNonNull(XWPFTests.class.getResourceAsStream("/XWPF/simpleTest.docx"))) {
-      var document = new XWPFDocument(stream);
+    try (var document = Documents.resource("/XWPF/simpleTest.docx")) {
       var text = new XWPFDocumentWrapper(document).paragraph(0).text();
 
       assertThat(text, equalTo("No Justice"));
@@ -25,8 +23,7 @@ class XWPFTests {
 
   @Test
   void getPictureTest() throws IOException {
-    try (var stream = Objects.requireNonNull(XWPFTests.class.getResourceAsStream("/XWPF/pictureTest.docx"))) {
-      var document = new XWPFDocument(stream);
+    try (var document = Documents.resource("/XWPF/pictureTest.docx")) {
       var picture = new XWPFDocumentWrapper(document).paragraph(0).run(0).pictures();
 
       assertThat(picture.size(), equalTo(1));
