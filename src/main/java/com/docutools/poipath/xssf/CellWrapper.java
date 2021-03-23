@@ -1,23 +1,66 @@
 package com.docutools.poipath.xssf;
 
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.xssf.usermodel.XSSFCell;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 public record CellWrapper(XSSFCell cell) {
 
-  public String content() {
+  public CellType cellType() {
+    return cell.getCellType();
+  }
+
+  public String text() {
     return switch (cell.getCellType()) {
-      case _NONE -> "";
+      case _NONE, BLANK -> "";
       case NUMERIC -> String.valueOf(cell.getNumericCellValue());
       case STRING -> cell.getStringCellValue();
       case FORMULA -> cell.getCellFormula();
-      case BLANK -> "";
       case BOOLEAN -> String.valueOf(cell.getBooleanCellValue());
       case ERROR -> cell.getErrorCellString();
     };
+  }
+
+  public String stringValue() {
+    return cell.getStringCellValue();
+  }
+
+  public boolean booleanValue() {
+    return cell.getBooleanCellValue();
   }
 
   public double doubleValue() {
     return cell.getNumericCellValue();
   }
 
+  public float floatValue() {
+    return (float) doubleValue();
+  }
+
+  public long longValue() {
+    return Math.round(doubleValue());
+  }
+
+  public int intValue() {
+    return Math.round(floatValue());
+  }
+
+  public LocalDate localDate() {
+    var date = cell.getDateCellValue();
+    return LocalDate.ofInstant(date.toInstant(), ZoneId.systemDefault());
+  }
+
+  public LocalDateTime localDateTime() {
+    var date = cell.getDateCellValue();
+    return LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
+  }
+
+  public ZonedDateTime zonedDateTime() {
+    var date = cell.getDateCellValue();
+    return ZonedDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
+  }
 }

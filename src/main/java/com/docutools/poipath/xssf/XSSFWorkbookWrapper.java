@@ -18,6 +18,10 @@ public record XSSFWorkbookWrapper(XSSFWorkbook workbook, String language) {
     return new SheetWrapper(workbook.getSheet(name));
   }
 
+  public int numberOfSheets() {
+    return workbook.getNumberOfSheets();
+  }
+
   private static Optional<String> findWorkbookLanguage(XSSFWorkbook workbook) {
     return workbook.getProperties()
             .getCoreProperties()

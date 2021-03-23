@@ -8,4 +8,7 @@ public record SheetWrapper(XSSFSheet sheet) {
     return new RowWrapper(sheet.getRow(i));
   }
 
+  public String sheetName() {
+    return sheet.getSheetName();
+  }
 }
