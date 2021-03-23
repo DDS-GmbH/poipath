@@ -24,7 +24,7 @@ class XSSFTests {
   @Test
   void simpleNavigationTest() throws IOException {
     workbook = new XSSFWorkbook(XSSFTests.class.getResourceAsStream("/XSSF/simpleTest.xlsx"));
-    var text = XSSFWorkbookWrapper.parse(workbook).sheet("OG").row(0).cell(0).content();
+    var text = new XSSFWorkbookWrapper(workbook).sheet("OG").row(0).cell(0).content();
 
     assertThat(text, equalTo("No Peace"));
   }
@@ -32,7 +32,7 @@ class XSSFTests {
   @Test
   void doubleTest() throws IOException {
     workbook = new XSSFWorkbook(XSSFTests.class.getResourceAsStream("/XSSF/numberTest.xlsx"));
-    var cell = XSSFWorkbookWrapper.parse(workbook).sheet("OG").row(0).cell(0);
+    var cell = new XSSFWorkbookWrapper(workbook).sheet("OG").row(0).cell(0);
     var stringContent = cell.content();
     var doubleContent = cell.doubleValue();
 

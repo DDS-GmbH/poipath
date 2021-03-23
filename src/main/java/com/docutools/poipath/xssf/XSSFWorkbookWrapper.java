@@ -2,15 +2,12 @@ package com.docutools.poipath.xssf;
 
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-public class XSSFWorkbookWrapper {
-  private final XSSFWorkbook workbook;
+import java.util.Optional;
 
-  private XSSFWorkbookWrapper(XSSFWorkbook workbook) {
-    this.workbook = workbook;
-  }
+public record XSSFWorkbookWrapper(XSSFWorkbook workbook, String language) {
 
-  public static XSSFWorkbookWrapper parse(XSSFWorkbook workbook) {
-    return new XSSFWorkbookWrapper(workbook);
+  public XSSFWorkbookWrapper(XSSFWorkbook workbook) {
+    this(workbook, findWorkbookLanguage(workbook).orElse(null));
   }
 
   public SheetWrapper sheet(int i) {
@@ -21,7 +18,11 @@ public class XSSFWorkbookWrapper {
     return new SheetWrapper(workbook.getSheet(name));
   }
 
-  public String language() {
-    return workbook.getProperties().getCoreProperties().getUnderlyingProperties().getLanguageProperty().get();
+  private static Optional<String> findWorkbookLanguage(XSSFWorkbook workbook) {
+    return workbook.getProperties()
+            .getCoreProperties()
+            .getUnderlyingProperties()
+            .getLanguageProperty();
   }
+
 }

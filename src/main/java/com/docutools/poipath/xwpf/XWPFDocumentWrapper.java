@@ -2,16 +2,7 @@ package com.docutools.poipath.xwpf;
 
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 
-public class XWPFDocumentWrapper {
-  private final XWPFDocument document;
-
-  private XWPFDocumentWrapper(XWPFDocument document) {
-    this.document = document;
-  }
-
-  public static XWPFDocumentWrapper parse(XWPFDocument document) {
-    return new XWPFDocumentWrapper(document);
-  }
+public record XWPFDocumentWrapper(XWPFDocument document) {
 
   public ParagraphListWrapper paragraphs() {
     return new ParagraphListWrapper(document.getParagraphs());

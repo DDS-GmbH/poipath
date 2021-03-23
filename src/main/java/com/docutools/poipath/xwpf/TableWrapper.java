@@ -2,12 +2,7 @@ package com.docutools.poipath.xwpf;
 
 import org.apache.poi.xwpf.usermodel.XWPFTable;
 
-public class TableWrapper {
-  private final XWPFTable table;
-
-  public TableWrapper(XWPFTable table) {
-    this.table = table;
-  }
+public record TableWrapper(XWPFTable table) {
 
   public int numberRows() {
     return table.getRows().size();

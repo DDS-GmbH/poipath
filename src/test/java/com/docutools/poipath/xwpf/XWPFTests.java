@@ -23,7 +23,7 @@ class XWPFTests {
   @Test
   void simpleNavigationTest() throws IOException {
     document = new XWPFDocument(XWPFTests.class.getResourceAsStream("/XWPF/simpleTest.docx"));
-    var text = XWPFDocumentWrapper.parse(document).paragraph(0).text();
+    var text = new XWPFDocumentWrapper(document).paragraph(0).text();
 
     assertThat(text, equalTo("No Justice"));
   }
@@ -31,7 +31,7 @@ class XWPFTests {
   @Test
   void getPictureTest() throws IOException {
     document = new XWPFDocument(XWPFTests.class.getResourceAsStream("/XWPF/pictureTest.docx"));
-    var picture = XWPFDocumentWrapper.parse(document).paragraph(0).run(0).pictures();
+    var picture = new XWPFDocumentWrapper(document).paragraph(0).run(0).pictures();
 
     assertThat(picture.size(), equalTo(1));
   }

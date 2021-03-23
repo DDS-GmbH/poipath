@@ -2,12 +2,7 @@ package com.docutools.poipath.xwpf;
 
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 
-public class ParagraphWrapper {
-  private final XWPFParagraph paragraph;
-
-  public ParagraphWrapper(XWPFParagraph xwpfParagraph) {
-    this.paragraph = xwpfParagraph;
-  }
+public record ParagraphWrapper(XWPFParagraph paragraph) {
 
   public RunListWrapper runs() {
     return new RunListWrapper(paragraph.getRuns());
@@ -20,4 +15,5 @@ public class ParagraphWrapper {
   public String text() {
     return paragraph.getText();
   }
+
 }
