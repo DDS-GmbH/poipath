@@ -2,10 +2,15 @@ package com.docutools.poipath.xwpf;
 
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public record ParagraphWrapper(XWPFParagraph paragraph) {
 
-  public RunListWrapper runs() {
-    return new RunListWrapper(paragraph.getRuns());
+  public List<RunWrapper> runs() {
+    return paragraph.getRuns().stream()
+            .map(RunWrapper::new)
+            .collect(Collectors.toList());
   }
 
   public RunWrapper run(int i) {

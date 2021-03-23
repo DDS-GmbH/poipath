@@ -2,14 +2,28 @@ package com.docutools.poipath.xwpf;
 
 import org.apache.poi.xwpf.usermodel.XWPFTableCell;
 
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+
 public record CellWrapper(XWPFTableCell cell) {
 
-  public ParagraphListWrapper paragraphs() {
-    return new ParagraphListWrapper(cell.getParagraphs());
+  public List<BodyElementWrapper> bodyElements() {
+    return cell.getBodyElements().stream()
+            .map(BodyElementWrapper::new)
+            .collect(Collectors.toList());
   }
 
-  public ParagraphWrapper paragraph(int i) {
-    return new ParagraphWrapper(cell.getParagraphArray(i));
+  public BodyElementWrapper bodyElement(int index) {
+    return new BodyElementWrapper(cell.getBodyElements().get(index));
+  }
+
+  public String text() {
+    return bodyElements().stream()
+            .map(BodyElementWrapper::asParagraph)
+            .filter(Objects::nonNull)
+            .map(ParagraphWrapper::text)
+            .collect(Collectors.joining("\n"));
   }
 
 }

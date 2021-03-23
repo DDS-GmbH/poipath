@@ -2,14 +2,19 @@ package com.docutools.poipath.xwpf;
 
 import org.apache.poi.xwpf.usermodel.XWPFTable;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public record TableWrapper(XWPFTable table) {
 
-  public int numberRows() {
+  public int numberOfRows() {
     return table.getRows().size();
   }
 
-  public RowListWrapper rows() {
-    return new RowListWrapper(table.getRows());
+  public List<RowWrapper> rows() {
+    return table.getRows().stream()
+            .map(RowWrapper::new)
+            .collect(Collectors.toList());
   }
 
   public RowWrapper row(int i) {

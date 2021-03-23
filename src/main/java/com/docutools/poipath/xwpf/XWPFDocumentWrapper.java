@@ -1,30 +1,24 @@
 package com.docutools.poipath.xwpf;
 
+import com.docutools.poipath.POIUtils;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 
-public record XWPFDocumentWrapper(XWPFDocument document) {
+public record XWPFDocumentWrapper(XWPFDocument document, String language) {
 
-  public ParagraphListWrapper paragraphs() {
-    return new ParagraphListWrapper(document.getParagraphs());
+  public XWPFDocumentWrapper(XWPFDocument document) {
+    this(document, POIUtils.findLanguage(document).orElse(null));
   }
 
-  public ParagraphWrapper paragraph(int i) {
-    return new ParagraphWrapper(document.getParagraphArray(i));
+  public BodyElementWrapper bodyElement(int index) {
+    return new BodyElementWrapper(document.getBodyElements().get(index));
   }
 
-  public TableListWrapper tables() {
-    return new TableListWrapper(document.getTables());
+  public ParagraphWrapper paragraph(int index) {
+    return bodyElement(index).asParagraph();
   }
 
-  public TableWrapper table(int i) {
-    return new TableWrapper(document.getTableArray(i));
+  public TableWrapper table(int index) {
+      return bodyElement(index).asTable();
   }
 
-  public int length() {
-    return document.getParagraphs().size();
-  }
-
-  public String language() {
-    return document.getProperties().getCoreProperties().getUnderlyingProperties().getLanguageProperty().get();
-  }
 }

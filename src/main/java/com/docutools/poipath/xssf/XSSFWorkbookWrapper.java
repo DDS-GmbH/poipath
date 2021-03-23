@@ -1,5 +1,6 @@
 package com.docutools.poipath.xssf;
 
+import com.docutools.poipath.POIUtils;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.util.Optional;
@@ -7,7 +8,7 @@ import java.util.Optional;
 public record XSSFWorkbookWrapper(XSSFWorkbook workbook, String language) {
 
   public XSSFWorkbookWrapper(XSSFWorkbook workbook) {
-    this(workbook, findWorkbookLanguage(workbook).orElse(null));
+    this(workbook, POIUtils.findLanguage(workbook).orElse(null));
   }
 
   public SheetWrapper sheet(int i) {
@@ -20,13 +21,6 @@ public record XSSFWorkbookWrapper(XSSFWorkbook workbook, String language) {
 
   public int numberOfSheets() {
     return workbook.getNumberOfSheets();
-  }
-
-  private static Optional<String> findWorkbookLanguage(XSSFWorkbook workbook) {
-    return workbook.getProperties()
-            .getCoreProperties()
-            .getUnderlyingProperties()
-            .getLanguageProperty();
   }
 
 }
