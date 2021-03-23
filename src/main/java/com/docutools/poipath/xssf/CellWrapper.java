@@ -1,12 +1,11 @@
 package com.docutools.poipath.xssf;
 
-import org.apache.poi.ss.usermodel.CellType;
-import org.apache.poi.xssf.usermodel.XSSFCell;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.xssf.usermodel.XSSFCell;
 
 public record CellWrapper(XSSFCell cell) {
 
@@ -14,6 +13,11 @@ public record CellWrapper(XSSFCell cell) {
     return cell.getCellType();
   }
 
+  /**
+   * Returns the text content of the cell.
+   *
+   * @return the text content of the cell
+   */
   public String text() {
     return switch (cell.getCellType()) {
       case _NONE, BLANK -> "";

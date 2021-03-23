@@ -1,9 +1,8 @@
 package com.docutools.poipath.xwpf;
 
-import org.apache.poi.xwpf.usermodel.XWPFTableRow;
-
 import java.util.List;
 import java.util.stream.Collectors;
+import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 
 public record RowWrapper(XWPFTableRow row) {
 
@@ -11,10 +10,15 @@ public record RowWrapper(XWPFTableRow row) {
     return row.getTableCells().size();
   }
 
+  /**
+   * Returns the {@link org.apache.poi.xwpf.usermodel.XWPFTableCell}s in the row.
+   *
+   * @return the cells
+   */
   public List<CellWrapper> cells() {
     return row.getTableCells().stream()
-            .map(CellWrapper::new)
-            .collect(Collectors.toList());
+        .map(CellWrapper::new)
+        .collect(Collectors.toList());
   }
 
   public CellWrapper cell(int index) {

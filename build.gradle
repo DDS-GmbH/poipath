@@ -5,8 +5,8 @@ plugins {
     id 'checkstyle'
 }
 
-group = 'com.docutools'
-version = '1.1.2'
+group = 'com.docu-tools'
+version = '1.0.0'
 sourceCompatibility = 16
 targetCompatibility = 16
 
@@ -58,6 +58,7 @@ dependencies {
 
 java {
     withSourcesJar()
+    withJavadocJar()
 }
 
 test {

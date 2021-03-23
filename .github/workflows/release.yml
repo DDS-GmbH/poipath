@@ -1,8 +1,8 @@
 name: Release new JAR to GitHub Packages
 on:
   push:
-    branches:
-      - main
+    tags:
+      - "v*"
 jobs:
   gradle-publish:
     runs-on: ubuntu-latest
@@ -16,3 +16,10 @@ jobs:
       - uses: eskatos/gradle-command-action@v1
         with:
           arguments: build -x test -x check publish
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: ${{ secrets.POIPATH_RELEASE_TOKEN }}
+          prerelease: false
+          files: |
+            .build/libs/*.jar
+            License.md

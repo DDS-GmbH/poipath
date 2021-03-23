@@ -1,12 +1,12 @@
 package com.docutools.poipath.xssf;
 
-import com.docutools.poipath.POIUtils;
+import com.docutools.poipath.PoiUtils;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public record XSSFWorkbookWrapper(XSSFWorkbook workbook, String language) {
 
   public XSSFWorkbookWrapper(XSSFWorkbook workbook) {
-    this(workbook, POIUtils.findLanguage(workbook).orElse(null));
+    this(workbook, PoiUtils.findLanguage(workbook).orElse(null));
   }
 
   public SheetWrapper sheet(int i) {

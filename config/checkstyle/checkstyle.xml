@@ -27,9 +27,6 @@
     <module name="BeforeExecutionExclusionFileFilter">
         <property name="fileNamePattern" value="module\-info\.java$"/>
     </module>
-    <module name="BeforeExecutionExclusionFileFilter">
-        <property name="fileNamePattern" value="CellWrapper.java"/>
-    </module>
     <!-- https://checkstyle.org/config_filters.html#SuppressionFilter -->
     <module name="SuppressionFilter">
         <property name="file" value="${config_loc}/suppressions.xml" />
@@ -228,10 +225,10 @@
         <module name="AbbreviationAsWordInName">
             <property name="ignoreFinal" value="false"/>
             <property name="allowedAbbreviationLength" value="1"/>
-            <property name="allowedAbbreviations" value="XSSF,XWPF"/>
             <property name="tokens"
                       value="CLASS_DEF, INTERFACE_DEF, ENUM_DEF, ANNOTATION_DEF, ANNOTATION_FIELD_DEF,
                     PARAMETER_DEF, VARIABLE_DEF, METHOD_DEF"/>
+            <property name="allowedAbbreviations" value="URL,SXSSF"/>
         </module>
         <module name="OverloadMethodsDeclarationOrder"/>
         <module name="VariableDeclarationUsageDistance"/>
