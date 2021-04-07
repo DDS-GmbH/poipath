@@ -13,12 +13,4 @@ public record XWPFDocumentWrapper(XWPFDocument document, String language) {
     return new BodyElementWrapper(document.getBodyElements().get(index));
   }
 
-  public ParagraphWrapper paragraph(int index) {
-    return bodyElement(index).asParagraph();
-  }
-
-  public TableWrapper table(int index) {
-    return bodyElement(index).asTable();
-  }
-
 }
