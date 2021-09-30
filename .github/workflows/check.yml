@@ -18,13 +18,20 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Setup Java
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v2.3.1
         with:
-          java-version: 16
+          java-version: 17
+          distribution: 'zulu'
       - name: Run owasp dependency check
         uses: eskatos/gradle-command-action@v1
         with:
           arguments: dependencyCheckAnalyze
+      - name: Archive owasp check results
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: owasp-results
+          path: build/reports/dependency-check-report.html
   checkstyle:
     name: checkstyle
     runs-on: ubuntu-latest
@@ -34,13 +41,20 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Setup Java
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v2.3.1
         with:
-          java-version: 16
+          java-version: 17
+          distribution: 'zulu'
       - name: Run checkstyle
         uses: eskatos/gradle-command-action@v1
         with:
           arguments: checkMain checkTest
+      - name: Archive checkstyle results
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: checkstyle-results
+          path: build/reports/checkstyle.html
   tests:
     name: tests
     runs-on: ubuntu-latest
@@ -50,10 +64,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Setup Java
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v2.3.1
         with:
-          java-version: 16
+          java-version: 17
+          distribution: 'zulu'
       - name: Run tests
         uses: eskatos/gradle-command-action@v1
         with:
           arguments: test
+      - name: Archive test results
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: test-results
+          path: build/reports/tests/test
