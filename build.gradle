@@ -69,8 +69,8 @@ test {
 
 dependencyCheck {
     format = 'ALL'
-    junitFailOnCVSS = 7.0
-    failBuildOnCVSS = 9.0
+    junitFailOnCVSS = 6.0
+    failBuildOnCVSS = 6.0
     suppressionFile = 'config/dependency-check/suppression.xml'
 }
 tasks.withType(Checkstyle) {
