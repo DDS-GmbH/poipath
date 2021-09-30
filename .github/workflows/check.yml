@@ -23,7 +23,7 @@ jobs:
           java-version: 17
           distribution: 'zulu'
       - name: Run owasp dependency check
-        uses: eskatos/gradle-command-action@v2
+        uses: gradle/gradle-build-action@v2
         with:
           arguments: dependencyCheckAnalyze
       - name: Archive owasp check results
@@ -46,7 +46,7 @@ jobs:
           java-version: 17
           distribution: 'zulu'
       - name: Run checkstyle
-        uses: eskatos/gradle-command-action@v2
+        uses: gradle/gradle-build-action@v2
         with:
           arguments: checkMain checkTest
       - name: Archive checkstyle results
@@ -69,7 +69,7 @@ jobs:
           java-version: 17
           distribution: 'zulu'
       - name: Run tests
-        uses: eskatos/gradle-command-action@v2
+        uses: gradle/gradle-build-action@v2
         with:
           arguments: test
       - name: Archive test results
