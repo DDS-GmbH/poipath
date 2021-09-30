@@ -6,9 +6,9 @@ plugins {
 }
 
 group = 'com.docu-tools'
-version = '1.0.1'
-sourceCompatibility = 16
-targetCompatibility = 16
+version = '1.0.2'
+sourceCompatibility = 17
+targetCompatibility = 17
 
 configurations {
     compileOnly {
