@@ -26,7 +26,7 @@ publishing {
             name = "GitHubPackages"
             url "https://maven.pkg.github.com/dds-gmbh/poipath"
             credentials {
-                username = project.findProperty("GITHUB_USER") ?: System.getenv("GITHUB_USER")
+                username = project.findProperty("GITHUB_USERNAME") ?: System.getenv("GITHUB_USERNAME")
                 password = project.findProperty("GITHUB_TOKEN") ?: System.getenv("GITHUB_TOKEN")
             }
         }
