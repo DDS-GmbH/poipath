@@ -1,7 +1,7 @@
 plugins {
     id 'java'
     id 'maven-publish'
-    id "org.owasp.dependencycheck" version "6.3.2"
+    id "org.owasp.dependencycheck" version "6.4.1.1"
     id 'checkstyle'
 }
 
