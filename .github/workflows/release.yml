@@ -4,7 +4,7 @@ on:
     tags:
       - "v*"
 env:
-  GITHUB_USERNAME: codecitizen
+  GITHUB_USERNAME: AntonOellerer
 
 jobs:
   gradle-publish:
