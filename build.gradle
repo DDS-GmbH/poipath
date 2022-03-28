@@ -2,7 +2,7 @@ plugins {
     id 'jacoco'
     id 'java'
     id 'maven-publish'
-    id "org.owasp.dependencycheck" version "7.0.1"
+    id "org.owasp.dependencycheck" version "7.0.2"
     id 'checkstyle'
     id "org.sonarqube" version "3.3"
 }
