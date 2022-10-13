@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 
@@ -66,5 +67,9 @@ public record CellWrapper(XSSFCell cell) {
   public ZonedDateTime zonedDateTime() {
     var date = cell.getDateCellValue();
     return ZonedDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
+  }
+
+  public CellStyle cellStyle() {
+    return cell.getCellStyle();
   }
 }

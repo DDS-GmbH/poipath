@@ -13,4 +13,8 @@ public record XWPFDocumentWrapper(XWPFDocument document, String language) {
     return new BodyElementWrapper(document.getBodyElements().get(index));
   }
 
+  public static XWPFDocumentWrapper wrap(XWPFDocument document) {
+    return new XWPFDocumentWrapper(document);
+  }
+
 }

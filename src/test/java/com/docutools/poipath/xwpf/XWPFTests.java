@@ -46,7 +46,7 @@ class XWPFTests {
   @Test
   void findPictures() throws IOException {
     try (var document = Documents.resource("/XWPF/pictureTest.docx")) {
-      var picture = new XWPFDocumentWrapper(document).bodyElement(0).asParagraph().run(0).pictures();
+      var picture = Objects.requireNonNull(new XWPFDocumentWrapper(document).bodyElement(0).asParagraph()).run(0).pictures();
 
       assertThat(picture.size(), equalTo(1));
     }

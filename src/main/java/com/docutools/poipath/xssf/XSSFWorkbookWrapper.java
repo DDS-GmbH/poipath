@@ -21,4 +21,8 @@ public record XSSFWorkbookWrapper(XSSFWorkbook workbook, String language) {
     return workbook.getNumberOfSheets();
   }
 
+  public static XSSFWorkbookWrapper wrap(XSSFWorkbook workbook) {
+    return new XSSFWorkbookWrapper(workbook);
+  }
+
 }
