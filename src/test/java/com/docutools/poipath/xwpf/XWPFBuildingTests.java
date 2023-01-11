@@ -4,6 +4,7 @@ import static com.docutools.poipath.xwpf.XWPFDocumentWrapper.wrap;
 import static com.docutools.poipath.xwpf.XWPFBuilder.buildDocument;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.endsWith;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
@@ -78,7 +79,7 @@ class XWPFBuildingTests {
 
     // Assert
     assertThat(Objects.requireNonNull(wrap(document).bodyElement(0).asParagraph()).text(), startsWith("Lorem ipsum"));
-    assertThat(Objects.requireNonNull(wrap(document).bodyElement(1).asParagraph()).text(), startsWith("Tellus id"));
+    assertThat(Objects.requireNonNull(wrap(document).bodyElement(0).asParagraph()).text(), endsWith("arcu."));
   }
 
   @Test

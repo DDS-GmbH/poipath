@@ -50,13 +50,15 @@ public record XWPFBuilder<T>(XWPFBuilder<?> parent, T bodyElement) {
    */
   public XWPFBuilder<T> paragraph(String text) {
     var paragraphTexts = text.split("\n");
+    XWPFParagraph paragraph;
     if (bodyElement instanceof XWPFDocument document) {
-      Arrays.stream(paragraphTexts).forEach(t -> document.createParagraph().createRun().setText(t));
+      paragraph = document.createParagraph();
     } else if (bodyElement instanceof XWPFTableCell cell) {
-      Arrays.stream(paragraphTexts).forEach(t -> cell.addParagraph().createRun().setText(t));
+      paragraph = cell.addParagraph();
     } else {
       throw isUnsupported(XWPFParagraph.class);
     }
+    paragraph.createRun().setText(text);
     return this;
   }
 
