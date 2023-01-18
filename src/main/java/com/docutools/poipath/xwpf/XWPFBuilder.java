@@ -1,6 +1,5 @@
 package com.docutools.poipath.xwpf;
 
-import java.util.Arrays;
 import java.util.function.Consumer;
 import org.apache.poi.xwpf.usermodel.IBodyElement;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
@@ -28,7 +27,7 @@ public record XWPFBuilder<T>(XWPFBuilder<?> parent, T bodyElement) {
   }
 
   /**
-   * Creates a new {@link XWPFParagraph}
+   * Creates a new {@link XWPFParagraph}.
    *
    * @return the {@link XWPFBuilder} for {@link XWPFParagraph}
    */
@@ -43,13 +42,12 @@ public record XWPFBuilder<T>(XWPFBuilder<?> parent, T bodyElement) {
   }
 
   /**
-   * Creates a new {@link XWPFParagraph} with the given text
+   * Creates a new {@link XWPFParagraph} with the given text.
    *
    * @param text paragraph content
    * @return {@code this}
    */
   public XWPFBuilder<T> paragraph(String text) {
-    var paragraphTexts = text.split("\n");
     XWPFParagraph paragraph;
     if (bodyElement instanceof XWPFDocument document) {
       paragraph = document.createParagraph();
@@ -63,7 +61,7 @@ public record XWPFBuilder<T>(XWPFBuilder<?> parent, T bodyElement) {
   }
 
   /**
-   * Creates a new {@link XWPFRun}
+   * Creates a new {@link XWPFRun}.
    *
    * @return the {@link XWPFBuilder} for {@link XWPFRun}
    */
@@ -75,7 +73,7 @@ public record XWPFBuilder<T>(XWPFBuilder<?> parent, T bodyElement) {
   }
 
   /**
-   * Creates a new {@link XWPFRun} with the given text
+   * Creates a new {@link XWPFRun} with the given text.
    *
    * @param text runs content
    * @return {@code this}
@@ -90,7 +88,7 @@ public record XWPFBuilder<T>(XWPFBuilder<?> parent, T bodyElement) {
   }
 
   /**
-   * Creates a new {@link XWPFTable}
+   * Creates a new {@link XWPFTable}.
    *
    * @param rows # of rows
    * @param cols # of cols
@@ -104,7 +102,7 @@ public record XWPFBuilder<T>(XWPFBuilder<?> parent, T bodyElement) {
   }
 
   /**
-   * Creates a new {@link XWPFTableRow}
+   * Creates a new {@link XWPFTableRow}.
    *
    * @return the {@link XWPFBuilder} for {@link XWPFTableRow}
    */
@@ -128,18 +126,6 @@ public record XWPFBuilder<T>(XWPFBuilder<?> parent, T bodyElement) {
       return new XWPFBuilder<>(this, table.getRow(pos));
     }
     throw isUnsupported(XWPFTableRow.class);
-  }
-
-  /**
-   * Creates a new {@link XWPFTableCell}
-   *
-   * @return the {@link XWPFBuilder} for {@link XWPFTableCell}
-   */
-  public XWPFBuilder<XWPFTableCell> cell() {
-    if (bodyElement instanceof XWPFTableRow row) {
-      return new XWPFBuilder<>(this, row.addNewTableCell());
-    }
-    throw isUnsupported(XWPFTableCell.class);
   }
 
   /**
