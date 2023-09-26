@@ -9,8 +9,12 @@ plugins {
 
 group = 'com.docutools'
 version = '2.0.0'
-sourceCompatibility = 17
-targetCompatibility = 17
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
 
 configurations {
     compileOnly {
@@ -80,7 +84,7 @@ tasks.withType(Checkstyle) {
     ignoreFailures = false
     maxWarnings = 0 // Maximum number of warnings allowed
     reports {
-        html.destination rootProject.file("build/reports/checkstyle.html")
+        html.outputLocation = rootProject.file("build/reports/checkstyle.html")
     }
 }
 
