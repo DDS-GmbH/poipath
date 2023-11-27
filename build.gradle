@@ -53,7 +53,7 @@ publishing {
     }
 }
 
-def apachePOIVersion = '5.2.3'
+def apachePOIVersion = '5.2.5'
 
 dependencies {
     implementation("org.apache.poi:poi:$apachePOIVersion")
